@@ -4,21 +4,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "packages",
+    name: "ExpandableFloatingButton",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "packages",
-            targets: ["packages"]),
+            name: "ExpandableFloatingButton",
+            targets: ["ExpandableFloatingButton"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "packages"),
+            name: "ExpandableFloatingButton"),
         .testTarget(
             name: "packagesTests",
-            dependencies: ["packages"]
+            dependencies: ["ExpandableFloatingButton"]
         ),
     ]
 )
