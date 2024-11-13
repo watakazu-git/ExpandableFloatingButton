@@ -4,18 +4,43 @@ import SwiftUI
 public struct ExpandableFloatingButton: View {
     // MARK:  Internal Properties
     @State var isPushed: Bool = false
-    let isGradient: Bool = true
+    var isGradient: Bool = true
 
     // MARK: Argument Properties
-    let mainSystemName: String = "plus"
-    let firstSystemName: String = "person.fill"
-    let secondSystemName: String = "bell.fill"
-    let thirdSystemName: String = "square.and.arrow.up"
+    // Systemname
+    var mainSystemName: String
+    var firstSystemName: String
+    var secondSystemName: String
+    var thirdSystemName: String
 
-    let mainButtonColor: Color = .gray
-    let firstButtonColor: Color = .red
-    let secondButtonColor: Color = .blue
-    let thirdButtonColor: Color = .green
+    // Color
+    var mainButtonColor: Color
+    var firstButtonColor: Color
+    var secondButtonColor: Color
+    var thirdButtonColor: Color
+
+    // MARK: Public Initializer
+    public init(
+        isGradient: Bool = true,
+        mainSystemName: String = "plus",
+        firstSystemName: String = "person.fill",
+        secondSystemName: String = "bell.fill",
+        thirdSystemName: String = "square.and.arrow.up",
+        mainButtonColor: Color = .gray,
+        firstButtonColor: Color = .red,
+        secondButtonColor: Color = .blue,
+        thirdButtonColor: Color = .green
+    ) {
+        self.isGradient = isGradient
+        self.mainSystemName = mainSystemName
+        self.firstSystemName = firstSystemName
+        self.secondSystemName = secondSystemName
+        self.thirdSystemName = thirdSystemName
+        self.mainButtonColor = mainButtonColor
+        self.firstButtonColor = firstButtonColor
+        self.secondButtonColor = secondButtonColor
+        self.thirdButtonColor = thirdButtonColor
+    }
 
     public var body: some View {
         ButtonView(action: {}, systemName: firstSystemName, color: firstButtonColor, isPushed: $isPushed, isGradient: isGradient)
