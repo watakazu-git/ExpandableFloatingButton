@@ -4,11 +4,10 @@ import SwiftUI
 @MainActor
 /// A customizable Expandable Floating Button component for SwiftUI.
 public struct ExpandableFloatingButton: View {
-    // MARK: Internal Properties
+    // MARK: - Internal Properties
     @State private var isExpanded: Bool = false
-    let usesGradient: Bool
 
-    // MARK: Argument Properties
+    // MARK: - Argument Properties
     /// The system name for the main button icon.
     let mainIconName: String
     /// The system name for the first expandable button icon.
@@ -27,24 +26,26 @@ public struct ExpandableFloatingButton: View {
     /// The color of the third expandable button.
     let thirdButtonIconColor: Color
 
-    // MARK: Public Initializer
+    /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
+    let usesGradient: Bool
+
+    // MARK: - Public Initializer
     /**
      Initializes an ExpandableFloatingButton with customizable options.
 
      - Parameters:
-       - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
-       - mainIconName: The system name for the main button icon. Default is `"plus"`.
-       - firstButtonIconName: The system name for the first expandable button icon. Default is `"person.fill"`.
-       - secondButtonIconName: The system name for the second expandable button icon. Default is `"bell.fill"`.
-       - thirdButtonIconName: The system name for the third expandable button icon. Default is `"square.and.arrow.up"`.
-       - mainIconColor: The color of the main button. Default is `.gray`.
-       - firstButtonIconColor: The color of the first expandable button. Default is `.red`.
-       - secondButtonIconColor: The color of the second expandable button. Default is `.blue`.
-       - thirdButtonIconColor: The color of the third expandable button. Default is `.green`.
+        - mainIconName: The system name for the main button icon. Default is `"plus"`.
+        - firstButtonIconName: The system name for the first expandable button icon. Default is `"person.fill"`.
+        - secondButtonIconName: The system name for the second expandable button icon. Default is `"bell.fill"`.
+        - thirdButtonIconName: The system name for the third expandable button icon. Default is `"square.and.arrow.up"`.
+        - mainIconColor: The color of the main button. Default is `.gray`.
+        - firstButtonIconColor: The color of the first expandable button. Default is `.red`.
+        - secondButtonIconColor: The color of the second expandable button. Default is `.blue`.
+        - thirdButtonIconColor: The color of the third expandable button. Default is `.green`.
+        - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
      */
 
     public init(
-        usesGradient: Bool = false,
         mainIconName: String = "plus",
         firstButtonIconName: String = "person.fill",
         secondButtonIconName: String = "bell.fill",
@@ -52,9 +53,9 @@ public struct ExpandableFloatingButton: View {
         mainIconColor: Color = .gray,
         firstButtonIconColor: Color = .red,
         secondButtonIconColor: Color = .blue,
-        thirdButtonIconColor: Color = .green
+        thirdButtonIconColor: Color = .green,
+        usesGradient: Bool = false
     ) {
-        self.usesGradient = usesGradient
         self.mainIconName = mainIconName
         self.firstButtonIconName = firstButtonIconName
         self.secondButtonIconName = secondButtonIconName
@@ -63,6 +64,7 @@ public struct ExpandableFloatingButton: View {
         self.firstButtonIconColor = firstButtonIconColor
         self.secondButtonIconColor = secondButtonIconColor
         self.thirdButtonIconColor = thirdButtonIconColor
+        self.usesGradient = usesGradient
     }
 
     public var body: some View {
@@ -95,6 +97,7 @@ public struct ExpandableFloatingButton: View {
         .scaleEffect(isExpanded ? 1.3 : 1)
     }
 
+    // MARK: - FloatingButton
     /// A subview representing a single button in the floating button stack.
     private struct FloatingButton: View {
         // Arguments
@@ -112,15 +115,15 @@ public struct ExpandableFloatingButton: View {
 
         var body: some View {
             Button(action: { action() }) {
-                        Image(systemName: systemName)
-                            .padding()
-                            .foregroundStyle(.white)
-                            .fontWeight(.bold)
-                            .background(
-                                Circle()
-                                    .foregroundStyle(backgroundStyle)
-                            )
-                    }
+                Image(systemName: systemName)
+                    .padding()
+                    .foregroundStyle(.white)
+                    .fontWeight(.bold)
+                    .background(
+                        Circle()
+                            .foregroundStyle(backgroundStyle)
+                    )
+            }
         }
     }
 }
