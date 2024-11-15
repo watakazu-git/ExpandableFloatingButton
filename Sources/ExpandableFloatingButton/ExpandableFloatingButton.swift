@@ -5,7 +5,7 @@ import SwiftUI
 /// A customizable Expandable Floating Button component for SwiftUI.
 public struct ExpandableFloatingButton: View {
     // MARK: Internal Properties
-    @State var isExpanded: Bool = false
+    @State private var isExpanded: Bool = false
     let usesGradient: Bool
 
     // MARK: Argument Properties
