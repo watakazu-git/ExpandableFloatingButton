@@ -66,25 +66,25 @@ public struct ExpandableFloatingButton: View {
 
     public var body: some View {
         // Layout for expandable buttons and the main button.
-        ButtonView(action: {}, systemName: firstButtonIconName, color: firstButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        FloatingButton(action: {}, systemName: firstButtonIconName, color: firstButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
 
         // Second button.
-        ButtonView(action: {}, systemName: secondButtonIconName, color: secondButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        FloatingButton(action: {}, systemName: secondButtonIconName, color: secondButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
             .opacity(isExpanded ? 1 : 0)
 
         // Third button.
-        ButtonView(action: {}, systemName: thirdButtonIconName, color: thirdButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        FloatingButton(action: {}, systemName: thirdButtonIconName, color: thirdButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(y: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
 
         // Main button with toggle action.
-        ButtonView(action: {
+        FloatingButton(action: {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)) {
                 isExpanded.toggle()
             }
@@ -95,7 +95,7 @@ public struct ExpandableFloatingButton: View {
     }
 
     /// A subview representing a single button in the floating button stack.
-    struct ButtonView: View {
+    struct FloatingButton: View {
         // Arguments
         let action: () -> Void
         let systemName: String
@@ -105,30 +105,21 @@ public struct ExpandableFloatingButton: View {
         @Binding var isExpanded: Bool
         let usesGradient: Bool
 
+        private var backgroundStyle: some ShapeStyle {
+            usesGradient ? AnyShapeStyle(color.gradient) : AnyShapeStyle(color)
+        }
+
         public var body: some View {
-            if usesGradient {
-                Button(action: { action() }, label: {
-                    Image(systemName: systemName)
-                        .padding()
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .background(
-                            Circle()
-                                .foregroundStyle(color.gradient)
-                        )
-                })
-            } else {
-                Button(action: { action() }, label: {
-                    Image(systemName: systemName)
-                        .padding()
-                        .foregroundStyle(.white)
-                        .fontWeight(.bold)
-                        .background(
-                            Circle()
-                                .foregroundStyle(color)
-                        )
-                })
-            }
+            Button(action: { action() }) {
+                        Image(systemName: systemName)
+                            .padding()
+                            .foregroundStyle(.white)
+                            .fontWeight(.bold)
+                            .background(
+                                Circle()
+                                    .foregroundStyle(backgroundStyle)
+                            )
+                    }
         }
     }
 }
