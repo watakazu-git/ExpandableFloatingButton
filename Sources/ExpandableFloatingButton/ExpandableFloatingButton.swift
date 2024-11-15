@@ -26,6 +26,10 @@ public struct ExpandableFloatingButton: View {
     /// The color of the third expandable button.
     let thirdButtonIconColor: Color
 
+    let firstButtonAction: () -> Void
+    let secondButtonAction: () -> Void
+    let thirdButtonAction: () -> Void
+
     /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
     let usesGradient: Bool
 
@@ -65,28 +69,31 @@ public struct ExpandableFloatingButton: View {
         self.secondButtonIconColor = secondButtonIconColor
         self.thirdButtonIconColor = thirdButtonIconColor
         self.usesGradient = usesGradient
+        self.firstButtonAction = {}
+        self.secondButtonAction = {}
+        self.thirdButtonAction = {}
     }
 
     public var body: some View {
-        // Layout for expandable buttons and the main button.
-        FloatingButton(action: {}, systemName: firstButtonIconName, color: firstButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        // First Button
+        FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
 
-        // Second button.
-        FloatingButton(action: {}, systemName: secondButtonIconName, color: secondButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        // Second Button
+        FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
             .opacity(isExpanded ? 1 : 0)
 
-        // Third button.
-        FloatingButton(action: {}, systemName: thirdButtonIconName, color: thirdButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
+        // Third Button
+        FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonIconColor, isExpanded: $isExpanded, usesGradient: usesGradient)
             .shadow(radius: 8)
             .offset(y: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
 
-        // Main button with toggle action.
+        // Main Button with toggle action
         FloatingButton(action: {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)) {
                 isExpanded.toggle()
