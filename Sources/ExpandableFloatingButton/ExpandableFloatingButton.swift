@@ -109,7 +109,7 @@ public struct ExpandableFloatingButton: View {
             usesGradient ? AnyShapeStyle(color.gradient) : AnyShapeStyle(color)
         }
 
-        public var body: some View {
+        var body: some View {
             Button(action: { action() }) {
                         Image(systemName: systemName)
                             .padding()
