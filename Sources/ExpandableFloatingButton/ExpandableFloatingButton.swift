@@ -58,6 +58,9 @@ public struct ExpandableFloatingButton: View {
         firstButtonIconColor: Color = .red,
         secondButtonIconColor: Color = .blue,
         thirdButtonIconColor: Color = .green,
+        firstButtonAction: @escaping () -> Void = {},
+        secondButtonAction: @escaping () -> Void = {},
+        thirdButtonAction: @escaping () -> Void = {},
         usesGradient: Bool = false
     ) {
         self.mainIconName = mainIconName
@@ -69,9 +72,9 @@ public struct ExpandableFloatingButton: View {
         self.secondButtonIconColor = secondButtonIconColor
         self.thirdButtonIconColor = thirdButtonIconColor
         self.usesGradient = usesGradient
-        self.firstButtonAction = {}
-        self.secondButtonAction = {}
-        self.thirdButtonAction = {}
+        self.firstButtonAction = firstButtonAction
+        self.secondButtonAction = secondButtonAction
+        self.thirdButtonAction = thirdButtonAction
     }
 
     public var body: some View {
