@@ -42,6 +42,7 @@ public struct ExpandableFloatingButton: View {
        - secondButtonIconColor: The color of the second expandable button. Default is `.blue`.
        - thirdButtonIconColor: The color of the third expandable button. Default is `.green`.
      */
+
     public init(
         usesGradient: Bool = false,
         mainIconName: String = "plus",
@@ -95,7 +96,7 @@ public struct ExpandableFloatingButton: View {
     }
 
     /// A subview representing a single button in the floating button stack.
-    struct FloatingButton: View {
+    private struct FloatingButton: View {
         // Arguments
         let action: () -> Void
         let systemName: String
