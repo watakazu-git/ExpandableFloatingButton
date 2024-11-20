@@ -83,33 +83,35 @@ public struct ExpandableFloatingButton: View {
 
     // MARK: - Body
     public var body: some View {
-        // First Button
-        FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-            .shadow(radius: 8)
-            .offset(x: isExpanded ? -64 : 0)
-            .opacity(isExpanded ? 1 : 0)
+        ZStack {
+            // First Button
+            FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+                .shadow(radius: 8)
+                .offset(x: isExpanded ? -64 : 0)
+                .opacity(isExpanded ? 1 : 0)
 
-        // Second Button
-        FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-            .shadow(radius: 8)
-            .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
-            .opacity(isExpanded ? 1 : 0)
+            // Second Button
+            FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+                .shadow(radius: 8)
+                .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
+                .opacity(isExpanded ? 1 : 0)
 
-        // Third Button
-        FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-            .shadow(radius: 8)
-            .offset(y: isExpanded ? -64 : 0)
-            .opacity(isExpanded ? 1 : 0)
+            // Third Button
+            FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+                .shadow(radius: 8)
+                .offset(y: isExpanded ? -64 : 0)
+                .opacity(isExpanded ? 1 : 0)
 
-        // Main Button with toggle action
-        FloatingButton(action: {
-            withAnimation(.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)) {
-                isExpanded.toggle()
-            }
-        }, systemName: mainIconName, color: mainIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-        .shadow(radius: 4)
-        .rotationEffect(.degrees(isExpanded ? 405 : 0))
-        .scaleEffect(isExpanded ? 1.3 : 1)
+            // Main Button with toggle action
+            FloatingButton(action: {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)) {
+                    isExpanded.toggle()
+                }
+            }, systemName: mainIconName, color: mainIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+            .shadow(radius: 4)
+            .rotationEffect(.degrees(isExpanded ? 405 : 0))
+            .scaleEffect(isExpanded ? 1.3 : 1)
+        }
     }
 
     // MARK: - FloatingButton
