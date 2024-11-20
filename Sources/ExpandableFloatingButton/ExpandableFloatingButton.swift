@@ -17,11 +17,11 @@ public struct ExpandableFloatingButton: View {
     /// The color of the main floating button.
     let mainIconColor: Color
     /// The color of the first floating button.
-    let firstButtonIconColor: Color
+    let firstButtonColor: Color
     /// The color of the second floating button.
-    let secondButtonIconColor: Color
+    let secondButtonColor: Color
     /// The color of the third floating button.
-    let thirdButtonIconColor: Color
+    let thirdButtonColor: Color
 
     /// The action to perform when the first floating button is tapped.
     let firstButtonAction: () -> Void
@@ -42,14 +42,14 @@ public struct ExpandableFloatingButton: View {
      Initializes an ExpandableFloatingButton with customizable options.
 
      - Parameters:
-        - mainIconName: The system name for the main button icon. Default is `"plus"`.
+        - mainIconName: The system name for the main button icon. Default is `plus`.
         - firstButtonIconName: The system name for the first expandable button icon. Default is `"person.fill"`.
         - secondButtonIconName: The system name for the second expandable button icon. Default is `"bell.fill"`.
         - thirdButtonIconName: The system name for the third expandable button icon. Default is `"square.and.arrow.up"`.
         - mainIconColor: The color of the main button. Default is `.gray`.
-        - firstButtonIconColor: The color of the first expandable button. Default is `.red`.
-        - secondButtonIconColor: The color of the second expandable button. Default is `.blue`.
-        - thirdButtonIconColor: The color of the third expandable button. Default is `.green`.
+        - firstButtonColor: The color of the first expandable button. Default is `.red`.
+        - secondButtonColor: The color of the second expandable button. Default is `.blue`.
+        - thirdButtonColor: The color of the third expandable button. Default is `.green`.
         - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
      */
 
@@ -59,9 +59,9 @@ public struct ExpandableFloatingButton: View {
         secondButtonIconName: String = "bell.fill",
         thirdButtonIconName: String = "square.and.arrow.up",
         mainIconColor: Color = .gray,
-        firstButtonIconColor: Color = .red,
-        secondButtonIconColor: Color = .blue,
-        thirdButtonIconColor: Color = .green,
+        firstButtonColor: Color = .red,
+        secondButtonColor: Color = .blue,
+        thirdButtonColor: Color = .green,
         firstButtonAction: @escaping () -> Void = {},
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
@@ -72,30 +72,31 @@ public struct ExpandableFloatingButton: View {
         self.secondButtonIconName = secondButtonIconName
         self.thirdButtonIconName = thirdButtonIconName
         self.mainIconColor = mainIconColor
-        self.firstButtonIconColor = firstButtonIconColor
-        self.secondButtonIconColor = secondButtonIconColor
-        self.thirdButtonIconColor = thirdButtonIconColor
+        self.firstButtonColor = firstButtonColor
+        self.secondButtonColor = secondButtonColor
+        self.thirdButtonColor = thirdButtonColor
         self.usesGradient = usesGradient
         self.firstButtonAction = firstButtonAction
         self.secondButtonAction = secondButtonAction
         self.thirdButtonAction = thirdButtonAction
     }
 
+    // MARK: - Body
     public var body: some View {
         // First Button
-        FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+        FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
 
         // Second Button
-        FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+        FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
             .shadow(radius: 8)
             .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
             .opacity(isExpanded ? 1 : 0)
 
         // Third Button
-        FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+        FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
             .shadow(radius: 8)
             .offset(y: isExpanded ? -64 : 0)
             .opacity(isExpanded ? 1 : 0)
