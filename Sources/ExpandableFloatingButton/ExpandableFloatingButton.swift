@@ -33,6 +33,9 @@ public struct ExpandableFloatingButton: View {
     /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
     let usesGradient: Bool
 
+    /// The animation type for the floating button expansion.
+    let animationType: Animation
+
     // MARK: - Internal Properties
     /// A Boolean value that determines whether the floating buttons are expanded or collapsed.
     @State private var isExpanded: Bool = false
@@ -51,6 +54,7 @@ public struct ExpandableFloatingButton: View {
         - secondButtonColor: The color of the second expandable button. Default is `.blue`.
         - thirdButtonColor: The color of the third expandable button. Default is `.green`.
         - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
+        - animationType: The animation to be used when expanding or collapsing the buttons.Default is `.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)`. This parameter allows you to customize the type of animation, such as `.linear`, `.easeInOut`, or a custom spring animation, to achieve the desired transition effect when the floating button toggles between expanded and collapsed states.
      */
 
     public init(
@@ -65,7 +69,8 @@ public struct ExpandableFloatingButton: View {
         firstButtonAction: @escaping () -> Void = {},
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
-        usesGradient: Bool = false
+        usesGradient: Bool = false,
+        animationType: Animation = .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)
     ) {
         self.mainIconName = mainIconName
         self.firstButtonIconName = firstButtonIconName
@@ -79,6 +84,7 @@ public struct ExpandableFloatingButton: View {
         self.firstButtonAction = firstButtonAction
         self.secondButtonAction = secondButtonAction
         self.thirdButtonAction = thirdButtonAction
+        self.animationType = animationType
     }
 
     // MARK: - Body
@@ -104,7 +110,7 @@ public struct ExpandableFloatingButton: View {
 
             // Main Button with toggle action
             FloatingButton(action: {
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)) {
+                withAnimation(animationType) {
                     isExpanded.toggle()
                 }
             }, systemName: mainIconName, color: mainIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
