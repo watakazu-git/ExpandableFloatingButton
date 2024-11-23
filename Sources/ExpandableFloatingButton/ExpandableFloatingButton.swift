@@ -30,6 +30,9 @@ public struct ExpandableFloatingButton: View {
     /// The action to perform when the third floating button is tapped.
     let thirdButtonAction: () -> Void
 
+    /// The size of the floating buttons
+    let buttonSize: CGFloat
+
     /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
     let usesGradient: Bool
 
@@ -53,6 +56,7 @@ public struct ExpandableFloatingButton: View {
         - firstButtonColor: The color of the first expandable button. Default is `.red`.
         - secondButtonColor: The color of the second expandable button. Default is `.blue`.
         - thirdButtonColor: The color of the third expandable button. Default is `.green`.
+        - buttonSize: The size of the floating buttons. Default is `48`.
         - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
         - animationType: The animation to be used when expanding or collapsing the buttons.Default is `.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)`. This parameter allows you to customize the type of animation, such as `.linear`, `.easeInOut`, or a custom spring animation, to achieve the desired transition effect when the floating button toggles between expanded and collapsed states.
      */
@@ -69,6 +73,7 @@ public struct ExpandableFloatingButton: View {
         firstButtonAction: @escaping () -> Void = {},
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
+        buttonSize: CGFloat = 48,
         usesGradient: Bool = false,
         animationType: Animation = .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)
     ) {
@@ -80,10 +85,11 @@ public struct ExpandableFloatingButton: View {
         self.firstButtonColor = firstButtonColor
         self.secondButtonColor = secondButtonColor
         self.thirdButtonColor = thirdButtonColor
-        self.usesGradient = usesGradient
         self.firstButtonAction = firstButtonAction
         self.secondButtonAction = secondButtonAction
         self.thirdButtonAction = thirdButtonAction
+        self.buttonSize = buttonSize
+        self.usesGradient = usesGradient
         self.animationType = animationType
     }
 
@@ -91,29 +97,57 @@ public struct ExpandableFloatingButton: View {
     public var body: some View {
         ZStack {
             // First Button
-            FloatingButton(action: { firstButtonAction() }, systemName: firstButtonIconName, color: firstButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-                .shadow(radius: 8)
-                .offset(x: isExpanded ? -64 : 0)
-                .opacity(isExpanded ? 1 : 0)
+            FloatingButton(
+                action: { firstButtonAction() },
+                systemName: firstButtonIconName,
+                color: firstButtonColor,
+                buttonSize: buttonSize,
+                usesGradient: usesGradient,
+                isExpanded: $isExpanded
+            )
+            .shadow(radius: 8)
+            .offset(x: isExpanded ? -64 : 0)
+            .opacity(isExpanded ? 1 : 0)
 
             // Second Button
-            FloatingButton(action: { secondButtonAction() }, systemName: secondButtonIconName, color: secondButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-                .shadow(radius: 8)
-                .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
-                .opacity(isExpanded ? 1 : 0)
+            FloatingButton(
+                action: { secondButtonAction() },
+                systemName: secondButtonIconName,
+                color: secondButtonColor,
+                buttonSize: buttonSize,
+                usesGradient: usesGradient,
+                isExpanded: $isExpanded
+            )
+            .shadow(radius: 8)
+            .offset(x: isExpanded ? -56 : 0, y: isExpanded ? -56 : 0)
+            .opacity(isExpanded ? 1 : 0)
 
             // Third Button
-            FloatingButton(action: { thirdButtonAction() }, systemName: thirdButtonIconName, color: thirdButtonColor, usesGradient: usesGradient, isExpanded: $isExpanded)
-                .shadow(radius: 8)
-                .offset(y: isExpanded ? -64 : 0)
-                .opacity(isExpanded ? 1 : 0)
+            FloatingButton(
+                action: { thirdButtonAction() },
+                systemName: thirdButtonIconName,
+                color: thirdButtonColor,
+                buttonSize: buttonSize,
+                usesGradient: usesGradient,
+                isExpanded: $isExpanded
+            )
+            .shadow(radius: 8)
+            .offset(y: isExpanded ? -64 : 0)
+            .opacity(isExpanded ? 1 : 0)
 
             // Main Button with toggle action
-            FloatingButton(action: {
-                withAnimation(animationType) {
-                    isExpanded.toggle()
-                }
-            }, systemName: mainIconName, color: mainIconColor, usesGradient: usesGradient, isExpanded: $isExpanded)
+            FloatingButton(
+                action: {
+                    withAnimation(animationType) {
+                        isExpanded.toggle()
+                    }
+                },
+                systemName: mainIconName,
+                color: mainIconColor,
+                buttonSize: buttonSize,
+                usesGradient: usesGradient,
+                isExpanded: $isExpanded
+            )
             .shadow(radius: 4)
             .rotationEffect(.degrees(isExpanded ? 405 : 0))
             .scaleEffect(isExpanded ? 1.3 : 1)
@@ -127,6 +161,7 @@ public struct ExpandableFloatingButton: View {
         let action: () -> Void
         let systemName: String
         let color: Color
+        let buttonSize: CGFloat
         let usesGradient: Bool
 
         // Internal Properties
@@ -138,6 +173,7 @@ public struct ExpandableFloatingButton: View {
         var body: some View {
             Button(action: { action() }) {
                 Image(systemName: systemName)
+                    .frame(width: buttonSize, height: buttonSize)
                     .padding()
                     .foregroundStyle(.white)
                     .fontWeight(.bold)
