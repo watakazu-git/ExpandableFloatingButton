@@ -173,6 +173,7 @@ public struct ExpandableFloatingButton: View {
         var body: some View {
             Button(action: { action() }) {
                 Image(systemName: systemName)
+                    .resizable()
                     .frame(width: buttonSize, height: buttonSize)
                     .padding()
                     .foregroundStyle(.white)
