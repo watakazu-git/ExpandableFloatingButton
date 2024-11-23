@@ -73,7 +73,7 @@ public struct ExpandableFloatingButton: View {
         firstButtonAction: @escaping () -> Void = {},
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
-        buttonSize: CGFloat = 48,
+        buttonSize: CGFloat = 32,
         usesGradient: Bool = false,
         animationType: Animation = .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)
     ) {
