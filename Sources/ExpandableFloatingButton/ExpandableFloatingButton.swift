@@ -4,6 +4,13 @@ import SwiftUI
 @MainActor
 /// A customizable Expandable Floating Button component for SwiftUI.
 public struct ExpandableFloatingButton: View {
+    // MARK: - Enum
+    /// Defines the floating button's background style for the buttons.
+    public enum FloatingButtonBackgroundStyle {
+        case solid
+        case gradient
+    }
+
     // MARK: - Argument Properties
     /// The system name for the main floating button icon.
     let mainIconName: String
@@ -34,7 +41,10 @@ public struct ExpandableFloatingButton: View {
     let buttonSize: CGFloat
 
     /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
-    let usesGradient: Bool
+//    let usesGradient: Bool
+
+    /// The gradient style for the buttons.
+    let floatingButtonBackgroundStyle: FloatingButtonBackgroundStyle
 
     /// The animation type for the floating button expansion.
     let animationType: Animation
@@ -58,7 +68,8 @@ public struct ExpandableFloatingButton: View {
         - thirdButtonColor: The color of the third expandable button. Default is `.green`.
         - buttonSize: The size of the floating buttons. Default is `48`.
         - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
-        - animationType: The animation to be used when expanding or collapsing the buttons.Default is `.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)`. This parameter allows you to customize the type of animation, such as `.linear`, `.easeInOut`, or a custom spring animation, to achieve the desired transition effect when the floating button toggles between expanded and collapsed states.
+        - floatingButtonBackgroundStyle: Specifies the background style of the buttons. Default is `.solid`.
+        - animationType: The animation for expanding or collapsing the buttons. Default is .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2). 
      */
 
     public init(
@@ -74,7 +85,8 @@ public struct ExpandableFloatingButton: View {
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
         buttonSize: CGFloat = 32,
-        usesGradient: Bool = false,
+//        usesGradient: Bool = false,
+        floatingButtonBackgroundStyle: FloatingButtonBackgroundStyle = .solid,
         animationType: Animation = .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)
     ) {
         self.mainIconName = mainIconName
@@ -89,7 +101,8 @@ public struct ExpandableFloatingButton: View {
         self.secondButtonAction = secondButtonAction
         self.thirdButtonAction = thirdButtonAction
         self.buttonSize = buttonSize
-        self.usesGradient = usesGradient
+//        self.usesGradient = usesGradient
+        self.floatingButtonBackgroundStyle = floatingButtonBackgroundStyle
         self.animationType = animationType
     }
 
@@ -102,7 +115,8 @@ public struct ExpandableFloatingButton: View {
                 systemName: firstButtonIconName,
                 color: firstButtonColor,
                 buttonSize: buttonSize,
-                usesGradient: usesGradient,
+//                usesGradient: usesGradient,
+                gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
@@ -115,7 +129,8 @@ public struct ExpandableFloatingButton: View {
                 systemName: secondButtonIconName,
                 color: secondButtonColor,
                 buttonSize: buttonSize,
-                usesGradient: usesGradient,
+//                usesGradient: usesGradient,
+                gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
@@ -128,7 +143,8 @@ public struct ExpandableFloatingButton: View {
                 systemName: thirdButtonIconName,
                 color: thirdButtonColor,
                 buttonSize: buttonSize,
-                usesGradient: usesGradient,
+//                usesGradient: usesGradient,
+                gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
@@ -145,7 +161,8 @@ public struct ExpandableFloatingButton: View {
                 systemName: mainIconName,
                 color: mainIconColor,
                 buttonSize: buttonSize,
-                usesGradient: usesGradient,
+//                usesGradient: usesGradient,
+                gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
             .shadow(radius: 4)
@@ -162,12 +179,20 @@ public struct ExpandableFloatingButton: View {
         let systemName: String
         let color: Color
         let buttonSize: CGFloat
-        let usesGradient: Bool
+//        let usesGradient: Bool
+        let gradientStyle: FloatingButtonBackgroundStyle
 
         // Internal Properties
         @Binding var isExpanded: Bool
         private var backgroundStyle: some ShapeStyle {
-            usesGradient ? AnyShapeStyle(color.gradient) : AnyShapeStyle(color)
+//            usesGradient ? AnyShapeStyle(color.gradient) : AnyShapeStyle(color)
+
+            switch gradientStyle {
+            case .solid:
+                return AnyShapeStyle(color)
+            case .gradient:
+                return AnyShapeStyle(color.gradient)
+            }
         }
 
         var body: some View {
