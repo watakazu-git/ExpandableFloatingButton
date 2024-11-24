@@ -106,7 +106,7 @@ public struct ExpandableFloatingButton: View {
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
-            .offset(x: isExpanded ? -buttonSize * 1.5 : 0)
+            .offset(x: isExpanded ? -buttonSize * 3 : 0)
             .opacity(isExpanded ? 1 : 0)
 
             // Second Button
@@ -119,7 +119,7 @@ public struct ExpandableFloatingButton: View {
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
-            .offset(x: isExpanded ? -buttonSize * 1.25 : 0, y: isExpanded ? -buttonSize * 1.25 : 0)
+            .offset(x: isExpanded ? -buttonSize * 1.75 : 0, y: isExpanded ? -buttonSize * 1.25 : 0)
             .opacity(isExpanded ? 1 : 0)
 
             // Third Button
@@ -132,7 +132,7 @@ public struct ExpandableFloatingButton: View {
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
-            .offset(y: isExpanded ? -buttonSize * 1.5 : 0)
+            .offset(y: isExpanded ? -buttonSize * 3 : 0)
             .opacity(isExpanded ? 1 : 0)
 
             // Main Button with toggle action
