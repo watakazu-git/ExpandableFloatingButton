@@ -176,7 +176,7 @@ public struct ExpandableFloatingButton: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: buttonSize, height: buttonSize)
-                    .padding()
+                    .padding(buttonSize * 0.5)
                     .foregroundStyle(.white)
                     .fontWeight(.bold)
                     .background(
