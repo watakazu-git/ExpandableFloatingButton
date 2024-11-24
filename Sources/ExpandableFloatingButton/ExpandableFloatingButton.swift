@@ -119,7 +119,7 @@ public struct ExpandableFloatingButton: View {
                 isExpanded: $isExpanded
             )
             .shadow(radius: 8)
-            .offset(x: isExpanded ? -buttonSize * 2 : 0, y: isExpanded ? -buttonSize * 2 : 0)
+            .offset(x: isExpanded ? -buttonSize * 2.25 : 0, y: isExpanded ? -buttonSize * 2.25 : 0)
             .opacity(isExpanded ? 1 : 0)
 
             // Third Button
