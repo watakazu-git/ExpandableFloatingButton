@@ -40,9 +40,6 @@ public struct ExpandableFloatingButton: View {
     /// The size of the floating buttons
     let buttonSize: CGFloat
 
-    /// A Boolean value that determines whether to use gradient backgrounds for the buttons.
-//    let usesGradient: Bool
-
     /// The gradient style for the buttons.
     let floatingButtonBackgroundStyle: FloatingButtonBackgroundStyle
 
@@ -67,9 +64,8 @@ public struct ExpandableFloatingButton: View {
         - secondButtonColor: The color of the second expandable button. Default is `.blue`.
         - thirdButtonColor: The color of the third expandable button. Default is `.green`.
         - buttonSize: The size of the floating buttons. Default is `48`.
-        - usesGradient: A Boolean value that indicates whether to use gradient backgrounds. Default is `false`.
         - floatingButtonBackgroundStyle: Specifies the background style of the buttons. Default is `.solid`.
-        - animationType: The animation for expanding or collapsing the buttons. Default is .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2). 
+        - animationType: The animation for expanding the buttons. Default is `.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)`.
      */
 
     public init(
@@ -85,7 +81,6 @@ public struct ExpandableFloatingButton: View {
         secondButtonAction: @escaping () -> Void = {},
         thirdButtonAction: @escaping () -> Void = {},
         buttonSize: CGFloat = 32,
-//        usesGradient: Bool = false,
         floatingButtonBackgroundStyle: FloatingButtonBackgroundStyle = .solid,
         animationType: Animation = .spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)
     ) {
@@ -101,7 +96,6 @@ public struct ExpandableFloatingButton: View {
         self.secondButtonAction = secondButtonAction
         self.thirdButtonAction = thirdButtonAction
         self.buttonSize = buttonSize
-//        self.usesGradient = usesGradient
         self.floatingButtonBackgroundStyle = floatingButtonBackgroundStyle
         self.animationType = animationType
     }
@@ -115,7 +109,6 @@ public struct ExpandableFloatingButton: View {
                 systemName: firstButtonIconName,
                 color: firstButtonColor,
                 buttonSize: buttonSize,
-//                usesGradient: usesGradient,
                 gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
@@ -129,7 +122,6 @@ public struct ExpandableFloatingButton: View {
                 systemName: secondButtonIconName,
                 color: secondButtonColor,
                 buttonSize: buttonSize,
-//                usesGradient: usesGradient,
                 gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
@@ -143,7 +135,6 @@ public struct ExpandableFloatingButton: View {
                 systemName: thirdButtonIconName,
                 color: thirdButtonColor,
                 buttonSize: buttonSize,
-//                usesGradient: usesGradient,
                 gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
@@ -161,7 +152,6 @@ public struct ExpandableFloatingButton: View {
                 systemName: mainIconName,
                 color: mainIconColor,
                 buttonSize: buttonSize,
-//                usesGradient: usesGradient,
                 gradientStyle: floatingButtonBackgroundStyle,
                 isExpanded: $isExpanded
             )
@@ -179,19 +169,14 @@ public struct ExpandableFloatingButton: View {
         let systemName: String
         let color: Color
         let buttonSize: CGFloat
-//        let usesGradient: Bool
         let gradientStyle: FloatingButtonBackgroundStyle
 
         // Internal Properties
         @Binding var isExpanded: Bool
         private var backgroundStyle: some ShapeStyle {
-//            usesGradient ? AnyShapeStyle(color.gradient) : AnyShapeStyle(color)
-
             switch gradientStyle {
-            case .solid:
-                return AnyShapeStyle(color)
-            case .gradient:
-                return AnyShapeStyle(color.gradient)
+            case .solid: return AnyShapeStyle(color)
+            case .gradient: return AnyShapeStyle(color.gradient)
             }
         }
 
