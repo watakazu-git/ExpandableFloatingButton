@@ -63,7 +63,7 @@ public struct ExpandableFloatingButton: View {
         - firstButtonColor: The color of the first expandable button. Default is `.red`.
         - secondButtonColor: The color of the second expandable button. Default is `.blue`.
         - thirdButtonColor: The color of the third expandable button. Default is `.green`.
-        - buttonSize: The size of the floating buttons. Default is `48`.
+        - buttonSize: The size of the floating buttons. Default is `32`.
         - floatingButtonBackgroundStyle: Specifies the background style of the buttons. Default is `.solid`.
         - animationType: The animation for expanding the buttons. Default is `.spring(response: 0.5, dampingFraction: 0.4, blendDuration: 0.2)`.
      */
